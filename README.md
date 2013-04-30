@@ -62,5 +62,6 @@ _Run this task with the `grunt htmlSnapshot` command._
 
 ## Release History
 
+- 0.2.1 - fixed a bug where quotes where missing from the html
 - 0.2.0 - added option to remove script tags from the output
 - 0.1.0 - Initial release

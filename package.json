@@ -1,6 +1,6 @@
 {
   "name": "grunt-html-snapshot",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A grunt task that fetches html snapshots of your web app for easier SEO",
   "author": {
     "name": "Christoph Burgdorf",
