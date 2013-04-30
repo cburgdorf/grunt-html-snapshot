@@ -17,8 +17,11 @@ var sendMessage = function (arg) {
 };
 
 var sanitizeHtml = function(html){
-    //remove weird pseudo new lines and escaped quotes
-    html = html.replace(/\\n|\\"/g,"");
+    //remove weird pseudo new lines
+    html = html.replace(/\\n/g,"");
+
+    //replace werid escaped quotes with real quotes
+    html = html.replace(/\\"/g,'"');
 
     //remove first quote character
     html = html.substr(1);
