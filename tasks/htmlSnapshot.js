@@ -39,15 +39,6 @@ module.exports = function(grunt) {
         });
 
         phantom.on("htmlSnapshot.pageReady", function (msg, url) {
-            
-            //remove weird pseudo new lines and escaped quotes
-            msg = msg.replace(/\\n|\\"/g,"");
-
-            //remove first quote character
-            msg = msg.substr(1);
-
-            //remove last quote character
-            msg = msg.substr(0, msg.length - 1);
 
             var fileName =  options.snapshotPath + 
                             options.fileNamePrefix + 
