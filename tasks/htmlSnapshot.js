@@ -22,7 +22,8 @@ module.exports = function(grunt) {
           msWaitForPages: 500,
           fileNamePrefix: 'snapshot_',
           snapshotPath: '',
-          sitePath: ''
+          sitePath: '',
+          removeScripts: false
         });
 
         var sanitizeFilename = function(name){
@@ -45,6 +46,10 @@ module.exports = function(grunt) {
                             sanitizeFilename(url.replace(sitePath, '')) +
                             '.html';
 
+            if (options.removeScripts){
+                msg = msg.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+            }
+            
             grunt.file.write(fileName, msg);
             grunt.log.writeln(fileName, 'written');
             phantom.halt();

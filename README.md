@@ -46,6 +46,9 @@ _Run this task with the `grunt htmlSnapshot` command._
                 //this is to give the page enough time to to assemble itself.
                 //if your page needs more time, tweak here.
                 msWaitForPages: 1000,
+                //if you would rather not keep the script tags in the html snapshots
+                //set `removeScripts` to true. It's false by default
+                removeScripts: true,
                 //he goes the list of all urls that should be fetched
                 urls: [
                   '',
