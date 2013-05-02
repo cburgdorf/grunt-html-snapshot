@@ -30,6 +30,10 @@ module.exports = function(grunt) {
             return name.replace(/#|\/|\!/g,'_') || '';
         };
 
+        var isLastUrl = function(url){
+            return options.urls[options.urls.length - 1] === url;
+        };
+
         phantom.on("error.onError", function (msg, trace) {
             grunt.log.writeln('error: ' + msg);
             phantom.halt();
@@ -41,9 +45,11 @@ module.exports = function(grunt) {
 
         phantom.on("htmlSnapshot.pageReady", function (msg, url) {
 
+            var plainUrl = url.replace(sitePath, '');
+
             var fileName =  options.snapshotPath + 
                             options.fileNamePrefix + 
-                            sanitizeFilename(url.replace(sitePath, '')) +
+                            sanitizeFilename(plainUrl) +
                             '.html';
 
             if (options.removeScripts){
@@ -53,6 +59,8 @@ module.exports = function(grunt) {
             grunt.file.write(fileName, msg);
             grunt.log.writeln(fileName, 'written');
             phantom.halt();
+
+            isLastUrl(plainUrl) && done();
         });
 
         var done = this.async();
