@@ -1,5 +1,5 @@
 /*
- * grunt-contrib-seo
+ * grunt-html-snapshot
  *
  * Copyright (c) 2013 Christoph Burgdorf, contributors
  * Licensed under the MIT license.
