@@ -18,7 +18,7 @@ var sendMessage = function (arg) {
 
 var sanitizeHtml = function(html){
     //remove weird pseudo new lines
-    html = html.replace(/\\n/g,"");
+    html = html.replace(/\\n|\\t/g,"");
 
     //replace werid escaped quotes with real quotes
     html = html.replace(/\\"/g,'"');
