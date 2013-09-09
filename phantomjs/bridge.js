@@ -35,6 +35,13 @@ var sanitizeHtml = function(html,options){
     return html;
 };
 
+var setCookies = function(page, cookies) {
+    var added, i;
+    for (i=0; i<cookies.length; i++){
+        added = page.addCookie(cookies[i]);
+    }
+};
+
 // This allows grunt to abort if the PhantomJS version isn"t adequate.
 sendMessage("private", "version", phantom.version);
 
@@ -49,6 +56,12 @@ page.onConsoleMessage = function (message) {
 page.onError = function (msg, trace) {
     sendMessage("error.onError", msg, trace);
 };
+
+page.onInitialized = function() {
+    if (options.cookies) {
+        setCookies(page, options.cookies);
+    }
+}
 
 page.open(url, function (status) {
 

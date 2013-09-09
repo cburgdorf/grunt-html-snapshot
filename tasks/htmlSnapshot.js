@@ -94,7 +94,8 @@ module.exports = function(grunt) {
                 options: {
                     phantomScript: asset('phantomjs/bridge.js'),
                     msWaitForPages: options.msWaitForPages,
-                    bodyAttr: options.bodyAttr
+                    bodyAttr: options.bodyAttr,
+                    cookies: options.cookies
                 },
                 // Complete the task when done.
                 done: function (err) {
