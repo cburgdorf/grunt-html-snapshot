@@ -11,8 +11,11 @@ var url = phantom.args[1];
 var options = JSON.parse(phantom.args[2] || {});
 
 // Messages are sent to the parent by appending them to the tempfile.
+// NOTE, the tempfile appears to be shared between asynchronously running grunt tasks
 var sendMessage = function (arg) {
     var args = Array.isArray(arg) ? arg : [].slice.call(arguments);
+    var channel = options.taskChannelPrefix + '.' + args[0];
+    args[0] = channel;
     fs.write(tmpfile, JSON.stringify(args) + "\n", "a");
 };
 
