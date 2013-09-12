@@ -25,7 +25,8 @@ module.exports = function(grunt) {
           sitePath: '',
           removeScripts: false,
           removeLinkTags: false,
-          removeMetaTags: false
+          removeMetaTags: false,
+          replaceStrings: []
         });
 
         var sanitizeFilename = function(name){
