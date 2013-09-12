@@ -56,13 +56,6 @@ module.exports = function(grunt) {
                             sanitizeFilename(plainUrl) +
                             '.html';
 
-            options.replaceStrings.forEach(function(obj) {
-                var key = Object.keys(obj);
-                var value = obj[key];
-                var regex = new RegExp(key, 'g');
-                msg = msg.replace(regex, value);
-            });
-
             if (options.removeScripts){
                 msg = msg.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
             }
@@ -74,6 +67,13 @@ module.exports = function(grunt) {
             if (options.removeMetaTags) {
                 msg = msg.replace(/<meta\s.*?(\/)?>/gi, '');
             }
+
+            options.replaceStrings.forEach(function(obj) {
+                var key = Object.keys(obj);
+                var value = obj[key];
+                var regex = new RegExp(key, 'g');
+                msg = msg.replace(regex, value);
+            });
 
             grunt.file.write(fileName, msg);
             grunt.log.writeln(fileName, 'written');
