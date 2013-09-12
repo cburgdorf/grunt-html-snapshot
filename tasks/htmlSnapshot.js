@@ -4,6 +4,7 @@
  * Copyright (c) 2013 Christoph Burgdorf, contributors
  * Licensed under the MIT license.
  */
+(function() {
 
 'use strict';
 
@@ -111,3 +112,5 @@ module.exports = function(grunt) {
         grunt.log.writeln('running html-snapshot task...hold your horses');
     });
 };
+
+}());
