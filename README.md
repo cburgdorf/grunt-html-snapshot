@@ -73,6 +73,7 @@ _Run this task with the `grunt htmlSnapshot` command._
 
 ## Release History
 
+- 0.4.0 - Add more sophisticated replace functionality to transform the html output (thanks to @okcoker)
 - 0.3.0 - Escape tabs & introduced new option bodyAttr to place a custom attribute on the body
 - 0.2.1 - fixed a bug where quotes where missing from the html
 - 0.2.0 - added option to remove script tags from the output
