@@ -4,6 +4,7 @@
  * Copyright (c) 2013 Christoph Burgdorf, contributors
  * Licensed under the MIT license.
  */
+(function() {
 
 'use strict';
 
@@ -23,7 +24,10 @@ module.exports = function(grunt) {
           fileNamePrefix: 'snapshot_',
           snapshotPath: '',
           sitePath: '',
-          removeScripts: false
+          removeScripts: false,
+          removeLinkTags: false,
+          removeMetaTags: false,
+          replaceStrings: []
         });
 
         var sanitizeFilename = function(name){
@@ -47,15 +51,30 @@ module.exports = function(grunt) {
 
             var plainUrl = url.replace(sitePath, '');
 
-            var fileName =  options.snapshotPath + 
-                            options.fileNamePrefix + 
+            var fileName =  options.snapshotPath +
+                            options.fileNamePrefix +
                             sanitizeFilename(plainUrl) +
                             '.html';
 
             if (options.removeScripts){
                 msg = msg.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
             }
-            
+
+            if (options.removeLinkTags){
+                msg = msg.replace(/<link\s.*?(\/)?>/gi, '');
+            }
+
+            if (options.removeMetaTags) {
+                msg = msg.replace(/<meta\s.*?(\/)?>/gi, '');
+            }
+
+            options.replaceStrings.forEach(function(obj) {
+                var key = Object.keys(obj);
+                var value = obj[key];
+                var regex = new RegExp(key, 'g');
+                msg = msg.replace(regex, value);
+            });
+
             grunt.file.write(fileName, msg);
             grunt.log.writeln(fileName, 'written');
             phantom.halt();
@@ -69,7 +88,7 @@ module.exports = function(grunt) {
         var sitePath = options.sitePath;
 
         grunt.util.async.forEachSeries(urls, function(url, next) {
-            
+
             phantom.spawn(sitePath + url, {
                 // Additional PhantomJS options.
                 options: {
@@ -82,7 +101,7 @@ module.exports = function(grunt) {
                     if (err) {
                         // If there was an error, abort the series.
                         done();
-                    } 
+                    }
                     else {
                         // Otherwise, process next url.
                         next();
@@ -93,3 +112,5 @@ module.exports = function(grunt) {
         grunt.log.writeln('running html-snapshot task...hold your horses');
     });
 };
+
+}());
