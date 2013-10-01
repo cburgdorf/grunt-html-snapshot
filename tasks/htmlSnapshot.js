@@ -30,6 +30,9 @@ module.exports = function(grunt) {
           replaceStrings: []
         });
 
+        // the channel prefix for this async grunt task
+        var taskChannelPrefix = "" + new Date().getTime();
+
         var sanitizeFilename = function(name){
             return name.replace(/#|\/|\!/g,'_') || '';
         };
@@ -38,17 +41,16 @@ module.exports = function(grunt) {
             return options.urls[options.urls.length - 1] === url;
         };
 
-        phantom.on("error.onError", function (msg, trace) {
+        phantom.on(taskChannelPrefix + ".error.onError", function (msg, trace) {
             grunt.log.writeln('error: ' + msg);
             phantom.halt();
         });
 
-        phantom.on("console", function (msg, trace) {
+        phantom.on(taskChannelPrefix + ".console", function (msg, trace) {
             grunt.log.writeln(msg);
         });
 
-        phantom.on("htmlSnapshot.pageReady", function (msg, url) {
-
+        phantom.on(taskChannelPrefix + ".htmlSnapshot.pageReady", function (msg, url) {
             var plainUrl = url.replace(sitePath, '');
 
             var fileName =  options.snapshotPath +
@@ -94,7 +96,9 @@ module.exports = function(grunt) {
                 options: {
                     phantomScript: asset('phantomjs/bridge.js'),
                     msWaitForPages: options.msWaitForPages,
-                    bodyAttr: options.bodyAttr
+                    bodyAttr: options.bodyAttr,
+                    cookies: options.cookies,
+                    taskChannelPrefix: taskChannelPrefix
                 },
                 // Complete the task when done.
                 done: function (err) {

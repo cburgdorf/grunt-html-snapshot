@@ -64,6 +64,10 @@ _Run this task with the `grunt htmlSnapshot` command._
                 urls: [
                   '',
                   '#!/en-gb/showcase'
+                ],
+                // a list of cookies to be put into the phantomjs cookies jar for the visited page
+                cookies: [
+                  {"path": "/", "domain": "localhost", "name": "lang", "value": "en-gb"}
                 ]
               }
             }
