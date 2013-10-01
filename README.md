@@ -77,6 +77,7 @@ _Run this task with the `grunt htmlSnapshot` command._
 
 ## Release History
 
+- 0.5.0 - Add option to set cookies. Also fixed a bug for scenarios where multiple instances of the tasks are being used in parallel.
 - 0.4.0 - Add more sophisticated replace functionality to transform the html output (thanks to @okcoker)
 - 0.3.0 - Escape tabs & introduced new option bodyAttr to place a custom attribute on the body
 - 0.2.1 - fixed a bug where quotes where missing from the html
