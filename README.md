@@ -46,6 +46,16 @@ _Run this task with the `grunt htmlSnapshot` command._
                 //this is to give the page enough time to to assemble itself.
                 //if your page needs more time, tweak here.
                 msWaitForPages: 1000,
+                //sanitize function to be used for filenames. Converts '#!/' to '_' as default
+                //has a filename argument, must have a return that is a sanitized string
+                sanitize: function (requestUri) {
+                    //returns 'index.html' if the url is '/', otherwise a prefix
+                    if (/\//.test(requestUri)) {
+                      return 'index.html';
+                    } else {
+                      return requestUri.replace(/\//g, 'prefix-');
+                    }
+                },
                 //if you would rather not keep the script tags in the html snapshots
                 //set `removeScripts` to true. It's false by default
                 removeScripts: true,

@@ -22,6 +22,9 @@ module.exports = function(grunt) {
           urls: [],
           msWaitForPages: 500,
           fileNamePrefix: 'snapshot_',
+          sanitize: function(requestUri) {
+            return requestUri.replace(/#|\/|\!/g, '_');
+          },
           snapshotPath: '',
           sitePath: '',
           removeScripts: false,
@@ -33,9 +36,7 @@ module.exports = function(grunt) {
         // the channel prefix for this async grunt task
         var taskChannelPrefix = "" + new Date().getTime();
 
-        var sanitizeFilename = function(name){
-            return name.replace(/#|\/|\!/g,'_') || '';
-        };
+        var sanitizeFilename = options.sanitize;
 
         var isLastUrl = function(url){
             return options.urls[options.urls.length - 1] === url;
