@@ -87,6 +87,7 @@ _Run this task with the `grunt htmlSnapshot` command._
 
 ## Release History
 
+- 0.6.1 - trigger warnings with grunt.warn(msg, 6) instead of grunt.log(msg)
 - 0.6.0 - Provide a function hook for the file name sanitization (by @mrgamer)
 - 0.5.0 - Add option to set cookies. Also fixed a bug for scenarios where multiple instances of the tasks are being used in parallel.
 - 0.4.0 - Add more sophisticated replace functionality to transform the html output (thanks to @okcoker)
