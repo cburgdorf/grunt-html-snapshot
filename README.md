@@ -50,7 +50,7 @@ _Run this task with the `grunt htmlSnapshot` command._
                 //has a filename argument, must have a return that is a sanitized string
                 sanitize: function (requestUri) {
                     //returns 'index.html' if the url is '/', otherwise a prefix
-                    if (/\//.test(requestUri)) {
+                    if (/\/$/.test(requestUri)) {
                       return 'index.html';
                     } else {
                       return requestUri.replace(/\//g, 'prefix-');
