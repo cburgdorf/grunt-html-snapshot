@@ -30,7 +30,8 @@ module.exports = function(grunt) {
           removeScripts: false,
           removeLinkTags: false,
           removeMetaTags: false,
-          replaceStrings: []
+          replaceStrings: [],
+          haltOnError: true
         });
 
         // the channel prefix for this async grunt task
@@ -43,8 +44,12 @@ module.exports = function(grunt) {
         };
 
         phantom.on(taskChannelPrefix + ".error.onError", function (msg, trace) {
-            phantom.halt();
-            grunt.warn('error: ' + msg, 6);
+            if (options.haltOnError) {
+                phantom.halt();
+                grunt.warn('error: ' + msg, 6);
+            } else {
+                grunt.log.writeln(msg);
+            }
         });
 
         phantom.on(taskChannelPrefix + ".console", function (msg, trace) {
