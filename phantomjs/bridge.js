@@ -51,6 +51,13 @@ sendMessage("private", "version", phantom.version);
 // Create a new page.
 var page = require("webpage").create();
 
+// Add options to page object
+if (options.pageOptions) {
+    Object.keys(options.pageOptions).forEach(function (key) {
+       page[key] = options.pageOptions[key];
+    });
+}
+
 // Relay console logging messages.
 page.onConsoleMessage = function (message) {
     sendMessage("console", message);
