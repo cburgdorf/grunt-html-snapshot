@@ -31,7 +31,8 @@ module.exports = function(grunt) {
           removeLinkTags: false,
           removeMetaTags: false,
           replaceStrings: [],
-          haltOnError: true
+          haltOnError: true,
+          pageOptions: {}
         });
 
         // the channel prefix for this async grunt task
@@ -104,7 +105,8 @@ module.exports = function(grunt) {
                     msWaitForPages: options.msWaitForPages,
                     bodyAttr: options.bodyAttr,
                     cookies: options.cookies,
-                    taskChannelPrefix: taskChannelPrefix
+                    taskChannelPrefix: taskChannelPrefix,
+                    pageOptions: options.pageOptions
                 },
                 // Complete the task when done.
                 done: function (err) {
